@@ -1,0 +1,14 @@
+# Benchmark Questions
+# Lines starting with # are comments and will be ignored
+# Add one question per line
+
+Describe gravity in simple terms for someone that doesn’t know anything about it
+Describe gravity for someone that knows about it and wants to know more about it
+Find a good analogy to describe gravity to someone.
+give a small quiz (3 questions) about gravity
+Do you think I need a big jacket if the weather is 10 degrees Celsius ?
+Give a common myth about gravity and explain why it is false
+Explain why a plane can fly even with gravity in simple bullet points 
+what are the steps to write a master thesis ?
+What are the pros and cons of nuclear energy ?
+I am strugulling with C++ where should i start ?
