@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+title: Benchmarking_LLM
+message: >-
+  If you use this software, please cite both the software
+  itself and the accompanying Zenodo data record below.
+type: software
+authors:
+  - family-names: Lamouille
+    given-names: Dorian
+    affiliation: University of Tartu / ECAM LaSalle Lyon
+  - family-names: Zorec
+    given-names: Matevž Borjan
+    affiliation: University of Tartu
+    orcid: https://orcid.org/0009-0001-3334-9378
+  - family-names: Baksh
+    given-names: Farnaz
+    affiliation: University of Tartu
+    orcid: https://orcid.org/0009-0009-8362-7696
+  - family-names: Kruusamäe
+    given-names: Karl
+    affiliation: University of Tartu
+    orcid: https://orcid.org/0000-0002-1720-1509
+repository-code: https://github.com/RobotStudyCompanion/Benchmarking_LLM
+license: Apache-2.0
+keywords:
+  - benchmark
+  - language-models
+  - edge-computing
+  - raspberry-pi
+  - social-robots
+  - educational-robotics
+references:
+  - type: data
+    title: >-
+      Supplemental materials to "Benchmarking Local Language
+      Models for Social Robots using Edge Devices"
+    authors:
+      - family-names: Lamouille
+        given-names: Dorian
+      - family-names: Zorec
+        given-names: Matevž Borjan
+      - family-names: Baksh
+        given-names: Farnaz
+      - family-names: Kruusamäe
+        given-names: Karl
+    year: 2026
+    doi: 10.5281/zenodo.19643021
+    url: https://doi.org/10.5281/zenodo.19643021
