@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: Benchmarking_LLM
+title: Benchmark_LM
 message: >-
   If you use this software, please cite both the software
   itself and the accompanying Zenodo data record below.
@@ -20,7 +20,7 @@ authors:
     given-names: Karl
     affiliation: University of Tartu
     orcid: https://orcid.org/0000-0002-1720-1509
-repository-code: https://github.com/RobotStudyCompanion/Benchmarking_LLM
+repository-code: https://github.com/RobotStudyCompanion/Benchmark_LM
 license: Apache-2.0
 keywords:
   - benchmark
