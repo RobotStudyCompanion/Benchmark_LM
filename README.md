@@ -39,7 +39,7 @@ The benchmark data, MMLU scores, teaching-effectiveness ratings, human rater wor
 | `analyse_results_computer.py` | Laptop variant with the model-size split; no Pi-specific telemetry. |
 | `compare_platforms.py` | Cross-platform comparison for a single model. Loads results from `results_pi4/`, `results_pi5/`, and `results_computer/`; writes bar charts of TPS, TTFT, inference time, IOPS, and TPJ to `graph_comparison/`. |
 
-**Forward-looking material** lives under [`future_work/`](future_work/) and is not used by any script in v0.1.
+**Forward-looking material** lives under [`future/`](future/) and is not used by any script in v0.1.
 
 ---
 
@@ -178,7 +178,7 @@ Reads the JSON files in `MMLU/`, splits models into small (< 2 B) and large (≥
 
 ## Future work
 
-The [`future_work/`](future_work/) directory holds forward-looking material that is not part of v0.1 or the accompanying paper, including a revised v2 question set (`benchmark_prompts.txt`) with pedagogical and bias axes, and scoping notes for a future C rewrite of the benchmark harness and a split-requirements dependency layout.
+The [`future/`](future/) directory holds forward-looking material that is not part of v0.1 or the accompanying paper, including a revised v2 question set (`benchmark_prompts.txt`) with pedagogical and bias axes, and scoping notes for a future C rewrite of the benchmark harness and a split-requirements dependency layout.
 
 ---
 
