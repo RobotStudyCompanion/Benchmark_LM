@@ -5,7 +5,7 @@
 [![Version](https://img.shields.io/github/v/tag/RobotStudyCompanion/Benchmarking_LLM?label=version)](https://github.com/RobotStudyCompanion/Benchmarking_LLM/tags)
 [![Licence](https://img.shields.io/badge/licence-Apache_2.0-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19643021.svg)](https://doi.org/10.5281/zenodo.19643021)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.19643021-blue)](https://doi.org/10.5281/zenodo.19643021)
 
 Reproducible benchmark suite for open-source language models on edge hardware, developed for the Robot Study Companion (RSC) project ([rsc.ee](https://rsc.ee)). The suite evaluates each model across three dimensions — inference efficiency (tokens per second, energy consumption), general knowledge (a six-category MMLU subset), and teaching effectiveness (LLM-rated against eight pedagogical criteria) — primarily on the Raspberry Pi 4, with scalability comparisons on the Raspberry Pi 5 and a laptop NVIDIA RTX 4060 GPU.
 
