@@ -1,25 +1,26 @@
 cff-version: 1.2.0
 title: Benchmark_LM
 message: >-
-  If you use this software, please cite both the software
-  itself and the accompanying Zenodo data record below.
+  If you use this software, please cite both the software itself and the
+  accompanying Zenodo data record below. Software authorship reflects
+  contribution to implementation, maintenance, and release engineering;
+  the paper byline (Lamouille et al., 2026) additionally credits
+  supervision and funding acquisition.
 type: software
 authors:
-  - family-names: Lamouille
-    given-names: Dorian
-    affiliation: University of Tartu / ECAM LaSalle Lyon
   - family-names: Zorec
     given-names: Matevž Borjan
     affiliation: University of Tartu
     orcid: https://orcid.org/0009-0001-3334-9378
+  - family-names: Lamouille
+    given-names: Dorian
+    affiliation: University of Tartu / ECAM LaSalle Lyon
   - family-names: Baksh
     given-names: Farnaz
     affiliation: University of Tartu
     orcid: https://orcid.org/0009-0009-8362-7696
-  - family-names: Kruusamäe
-    given-names: Karl
-    affiliation: University of Tartu
-    orcid: https://orcid.org/0000-0002-1720-1509
+version: v0.2
+date-released: 2026-04-21
 repository-code: https://github.com/RobotStudyCompanion/Benchmark_LM
 license: Apache-2.0
 keywords:
@@ -32,8 +33,8 @@ keywords:
 references:
   - type: data
     title: >-
-      Supplemental materials to "Benchmarking Local Language
-      Models for Social Robots using Edge Devices"
+      Supplemental materials to "Benchmarking Local Language Models for
+      Social Robots using Edge Devices"
     authors:
       - family-names: Lamouille
         given-names: Dorian
