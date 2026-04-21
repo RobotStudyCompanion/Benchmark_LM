@@ -4,7 +4,8 @@
 [![Version](https://img.shields.io/github/v/tag/RobotStudyCompanion/Benchmarking_LLM?label=version)](https://github.com/RobotStudyCompanion/Benchmarking_LLM/tags)
 [![Licence](https://img.shields.io/badge/licence-Apache_2.0-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19643021.svg)](https://doi.org/10.5281/zenodo.19643021)
+<!-- [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19643021.svg)](https://doi.org/10.5281/zenodo.19643021) -->
+[![CI](https://github.com/RobotStudyCompanion/Benchmarking_LLM/actions/workflows/ci.yml/badge.svg)](https://github.com/RobotStudyCompanion/Benchmarking_LLM/actions/workflows/ci.yml)
 
 Reproducible benchmark suite for open-source language models on edge hardware, developed for the Robot Study Companion (RSC) project ([rsc.ee](https://rsc.ee)). The suite evaluates each model across three dimensions — inference efficiency (tokens per second, energy consumption), general knowledge (a six-category MMLU subset), and teaching effectiveness (LLM-rated against eight pedagogical criteria) — primarily on the Raspberry Pi 4, with scalability comparisons on the Raspberry Pi 5 and a laptop NVIDIA RTX 4060 GPU.
 
@@ -16,10 +17,15 @@ The benchmark data, MMLU scores, teaching-effectiveness ratings, human rater wor
 
 | Script | Purpose |
 |---|---|
-| `benchmarking.py` | Measures inference throughput, latency, CPU/memory load, and (on Raspberry Pi) power and energy efficiency for each model × question pair. |
+| `benchmarking.py` | Laptop/desktop benchmark runner. Measures throughput, latency, CPU/memory load, and dual `time.time()`/`time.perf_counter()` timings. |
+| `benchmarking_pi4.py` | Raspberry Pi 4 benchmark runner. Adds power and energy telemetry (via `vcgencmd`), thermal wait-for-cooldown between models, and disk-I/O telemetry. |
+| `benchmarking_pi5.py` | Raspberry Pi 5 benchmark runner. Same telemetry as the Pi 4 script; note that the underlying power calibration is inherited from the Pi 4 (see paper §V-D). |
 | `MMLU.py` | Runs the six-category MMLU subset (Formal Logic, Global Facts, College Computer Science, College Mathematics, Marketing, High School Macroeconomics) via DeepEval. |
-| `analyze_results.py` | Aggregates per-run JSON results, produces summary statistics and plots, and optionally rates teaching effectiveness via the OpenAI API. |
+| `analyze_results.py` | Aggregates per-run JSON results from `./results/`, produces summary statistics and plots, and optionally rates teaching effectiveness via the OpenAI API. |
+| `analyze_results_pi4.py` | Pi 4 variant of the above, extended with disk-I/O metrics, thermal metrics, and model-size-split (<2 B / ≥2 B) graph generation. |
+| `analyse_results_computer.py` | Laptop/desktop variant of the analyser, with the model-size split but without Pi-specific telemetry. |
 | `visualize_mmlu.py` | Generates bar and radar plots from the MMLU JSON outputs. |
+| `compare_platforms.py` | Cross-platform comparison for a single model: loads results from `results_pi4/`, `results_pi5/`, and `results_computer/`, writes bar charts of TPS, TTFT, inference time, IOPS, and TPJ to `graph_comparison/`. |
 
 ---
 
