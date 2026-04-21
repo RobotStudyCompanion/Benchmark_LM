@@ -1,8 +1,8 @@
 # Benchmark_LM
 
 [![Repo status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![CI](https://github.com/RobotStudyCompanion/Benchmarking_LLM/actions/workflows/ci.yml/badge.svg)](https://github.com/RobotStudyCompanion/Benchmarking_LLM/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/github/v/tag/RobotStudyCompanion/Benchmarking_LLM?label=version)](https://github.com/RobotStudyCompanion/Benchmarking_LLM/tags)
+[![CI](https://github.com/RobotStudyCompanion/Benchmark_LM/actions/workflows/ci.yml/badge.svg)](https://github.com/RobotStudyCompanion/Benchmark_LM/actions/workflows/ci.yml)
+[![Version](https://img.shields.io/github/v/tag/RobotStudyCompanion/Benchmark_LM?label=version)](https://github.com/RobotStudyCompanion/Benchmark_LM/tags)
 [![Licence](https://img.shields.io/badge/licence-Apache_2.0-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.19643021-blue)](https://doi.org/10.5281/zenodo.19643021)
@@ -60,7 +60,7 @@ Power and disk-I/O telemetry relies on `vcgencmd` and `psutil.disk_io_counters()
 Clone the repository and run the provided setup script:
 
 ```bash
-git clone https://github.com/RobotStudyCompanion/Benchmarking_LLM.git
+git clone https://github.com/RobotStudyCompanion/Benchmark_LM.git
 cd Benchmarking_LLM
 ./setup.sh
 source .venv/bin/activate
