@@ -14,6 +14,7 @@ set -euo pipefail
 # --- Move to script directory so relative paths work regardless of cwd ---
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 cd "$SCRIPT_DIR"
+ASSUME_YES=0
 
 VENV_DIR=".venv"
 REQ_FILE="requirements.txt"
@@ -25,16 +26,32 @@ warn() { printf '\033[1;33m[warn ]\033[0m %s\n' "$*"; }
 err()  { printf '\033[1;31m[err  ]\033[0m %s\n' "$*" >&2; }
 
 usage() {
-    sed -n '2,10p' "$0" | sed 's/^# \{0,1\}//'
+    cat <<'EOF'
+setup.sh — environment management for Benchmarking_LLM (Linux only).
+
+Usage:
+  ./setup.sh            install (creates .venv and installs requirements)
+  ./setup.sh --force    recreate .venv from scratch
+  ./setup.sh --clean    remove .venv and exit
+  ./setup.sh --yes      non-interactive install (answers yes to prompts)
+  ./setup.sh --help     show this message
+
+After install, activate with:  source .venv/bin/activate
+EOF
     exit 0
 }
-
 confirm() {
-    # confirm "prompt" -> returns 0 on yes, 1 on no
+    [[ "$ASSUME_YES" == "1" ]] && return 0
     local reply
     read -r -p "$1 [y/N] " reply
     [[ "$reply" =~ ^[Yy]$ ]]
 }
+
+cleanup_on_interrupt() {
+    warn "Interrupted. Partial venv may be left at $VENV_DIR — rerun with --force to recreate."
+    exit 130
+}
+trap cleanup_on_interrupt INT TERM
 
 # --- OS check ---------------------------------------------------------------
 if [[ "$(uname -s)" != "Linux" ]]; then
@@ -48,6 +65,7 @@ case "${1:-}" in
     --help|-h)   usage ;;
     --clean)     MODE="clean" ;;
     --force)     MODE="force" ;;
+     --yes|-y)    ASSUME_YES=1; MODE="install" ;;
     "")          MODE="install" ;;
     *)           err "Unknown option: $1"; usage ;;
 esac
@@ -108,6 +126,11 @@ fi
 # shellcheck disable=SC1091
 source "$VENV_DIR/bin/activate"
 
+if [[ "${VIRTUAL_ENV:-}" != "$SCRIPT_DIR/$VENV_DIR" ]]; then
+    err "venv activation failed (VIRTUAL_ENV=${VIRTUAL_ENV:-unset})"
+    exit 1
+fi
+
 log "Upgrading pip ..."
 python -m pip install --upgrade pip --quiet
 
@@ -117,7 +140,7 @@ if [[ ! -f "$REQ_FILE" ]]; then
 fi
 
 log "Installing from $REQ_FILE ..."
-python -m pip install -r "$REQ_FILE"
+python -m pip install --upgrade -r "$REQ_FILE"
 
 # --- Optional Ollama check --------------------------------------------------
 if ! command -v ollama &>/dev/null; then
