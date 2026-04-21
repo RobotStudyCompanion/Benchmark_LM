@@ -14,7 +14,7 @@ from collections import defaultdict
 # Visualization imports
 try:
     import matplotlib.pyplot as plt
-    import matplotlib.patches as mpatches
+    # import matplotlib.patches as mpatches
     MATPLOTLIB_AVAILABLE = True
 except ImportError:
     print("Warning: matplotlib not installed. Run: pip install matplotlib")
@@ -439,7 +439,7 @@ class BenchmarkAnalyzer:
             model_name = result.get('model', 'unknown')
 
             print(f"Rating {idx+1}/{len(self.all_results)}: {model_name} - {question[:50]}...")
-
+# TEACHING-EFFECTIVENESS RATING PROMPT (referenced in paper Section III-B)
             try:
                 rating_prompt = f"""You are an expert educator evaluating the teaching effectiveness of AI responses.
 
