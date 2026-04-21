@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Benchmark Results Analyzer for Pi4 - Enhanced with I/O Metrics
+Benchmark Results Analyser for laptop/desktop host (no power/IO telemetry)
 Aggregates results, generates visualizations, and rates teaching effectiveness using OpenAI API
 """
 
@@ -627,7 +627,7 @@ class BenchmarkAnalyzer:
             model_name = result.get('model', 'unknown')
 
             print(f"Rating {idx+1}/{len(self.all_results)}: {model_name} - {question[:50]}...")
-
+# TEACHING-EFFECTIVENESS RATING PROMPT (referenced in paper Section III-B)
             try:
                 rating_prompt = f"""You are an expert educator evaluating the teaching effectiveness of AI responses.
 

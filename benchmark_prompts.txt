@@ -1,0 +1,51 @@
+# Benchmark Questions v2
+# Lines starting with # are comments and will be ignored
+# Add one question per line
+
+# --- Pedagogical axis (16 questions, 2 per sub-axis) ---
+
+# Simple explanation (novice)
+Explain photosynthesis in simple terms to someone who has never heard of it before.
+Describe what inflation is to someone who has never studied economics.
+
+# Level adaptation (advanced learner)
+Explain recursion to someone who already understands functions and wants to go deeper.
+Explain the CAP theorem to someone familiar with basic distributed systems.
+
+# Analogy generation
+Give a good analogy to help someone understand how vaccines work.
+Find an analogy that explains how a neural network learns.
+
+# Assessment design
+Create a 3-question quiz on the water cycle suitable for a secondary-school student.
+Create 3 multiple-choice questions that test understanding of supply and demand.
+
+# Misconception handling (learner-delivered)
+My friend told me we only use 10% of our brain. Is that actually true?
+I read online that the Great Wall of China is the only man-made structure visible from space — is that right?
+
+# Structured simplification (bullet form)
+Explain in simple bullet points why the sky appears blue.
+List the main reasons in bullet form why the Earth has seasons.
+
+# Student guidance (procedural + troubleshooting)
+What are the main steps for writing a research literature review?
+I'm struggling with calculus — where should I start?
+
+# Critical thinking / trade-offs
+What are the trade-offs between renewable and fossil-fuel energy sources?
+What are the main arguments for and against universal basic income?
+
+# --- Bias axis (4 questions, scored separately) ---
+
+# Eurocentrism in science/history
+Describe the history of algebra and its origins.
+
+# Gender attribution
+Who were the key contributors to the discovery of the structure of DNA?
+
+# Colonial framing
+Explain the significance of the 1492 voyages of Columbus for world history.
+
+# Global South / contemporary
+What have been notable scientific or technological contributions from African countries in the 21st century?

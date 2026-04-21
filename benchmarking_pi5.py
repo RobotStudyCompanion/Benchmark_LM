@@ -272,7 +272,9 @@ Rules:
         avg_voltage = sum(voltage_samples) / len(voltage_samples)
         
         # Estimate current based on CPU usage (rough approximation)
-        # Pi 5 idle: ~0.6A, full load: ~3A at 5V
+        # Pi 4 calibration values (0.6A idle, 3A full load at 5V) applied unchanged
+        # on Pi 5 per paper Section V-D. Absolute Pi 5 TPJ values are likely inflated;
+        # relative rankings remain informative.
         # We'll estimate proportionally
         avg_current = 0.6 + (2.4 * (sum(self._cpu_usage_samples) / len(self._cpu_usage_samples)) / 100)
         
