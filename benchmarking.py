@@ -207,7 +207,7 @@ Rules:
         Calculate tokens per joule
         Power (W) = Voltage (V) × Current (A)
         For Raspberry Pi, we estimate current based on CPU usage
-        Typical Pi 5: ~3A at full load at 5V = 15W
+        Typical Pi 4: ~3A at full load at 5V = 15W
         """
         if not voltage_samples or inference_time == 0 or tokens == 0:
             return None
@@ -216,7 +216,7 @@ Rules:
         avg_voltage = sum(voltage_samples) / len(voltage_samples)
         
         # Estimate current based on CPU usage (rough approximation)
-        # Pi 5 idle: ~0.6A, full load: ~3A at 5V
+        # Pi 4 idle: ~0.6A, full load: ~3A at 5V (calibration basis; see paper Section III-D)
         # We'll estimate proportionally
         avg_current = 0.6 + (2.4 * (sum(self._cpu_usage_samples) / len(self._cpu_usage_samples)) / 100)
         
@@ -323,7 +323,8 @@ Rules:
                 )
                 response_text = response['message']['content']
                 token_count = len(response_text.split())
-
+                # NOTE: word count, not token count. The published benchmark ran with stream=True
+                # this non-streaming path was not used for the paper.
                 # Get final metrics
                 cpu_samples.append(psutil.cpu_percent())
                 self._cpu_usage_samples = cpu_samples
