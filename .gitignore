@@ -1,3 +1,57 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+
+# --- Secrets ---
 .env
-.venv
+.env.local
+.env.*.local
+*.key
+
+# --- IDE / editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- MS Office lockfiles ---
+~$*.xlsx
+~$*.docx
+
+# --- Tool caches ---
+.claude/
+.deepeval/
+
+# --- Benchmark outputs (keep the folders, ignore session artefacts) ---
+# Uncomment these if you prefer to keep the repo lean of run artefacts.
+# Leaving them tracked is also fine — they are the published data.
+# results/
+# results_pi4/
+# results_pi5/
+# results_computer/
+# analysis_graphs/
+# analysis_graphs_pi4/
+# analysis_graphs_computer/
+# MMLU/
+# graph_comparison/
+
+# --- Legacy ---
 /net-commander
