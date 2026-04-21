@@ -1,157 +1,132 @@
 # Benchmarking_LLM
 
-This project provides tools to benchmark Large Language Models (LLMs) using Ollama, measuring performance metrics like inference time, tokens per second, CPU usage, memory consumption, and energy efficiency.This was made in the purpose of benchmarking models on edge devices (Raspberry Pi) in the context of the devellopement of an LLM solution for the RSC Project : rsc.ee. 
-This is part of the master thesis : Benchmarking and Deploying Local Language Models for 
-Social Educational Robots using Edge Devices
+[![Repo status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Version](https://img.shields.io/github/v/tag/RobotStudyCompanion/Benchmarking_LLM?label=version)](https://github.com/RobotStudyCompanion/Benchmarking_LLM/tags)
+[![Licence](https://img.shields.io/badge/licence-Apache_2.0-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19643021.svg)](https://doi.org/10.5281/zenodo.19643021)
 
-# Installation
+Reproducible benchmark suite for open-source language models on edge hardware, developed for the Robot Study Companion (RSC) project ([rsc.ee](https://rsc.ee)). The suite evaluates each model across three dimensions — inference efficiency (tokens per second, energy consumption), general knowledge (a six-category MMLU subset), and teaching effectiveness (LLM-rated against eight pedagogical criteria) — primarily on the Raspberry Pi 4, with scalability comparisons on the Raspberry Pi 5 and a laptop NVIDIA RTX 4060 GPU.
 
-You can download this code using this command :
+The benchmark data, MMLU scores, teaching-effectiveness ratings, human rater workbooks, and full methodology live in the accompanying Zenodo record: [10.5281/zenodo.19643021](https://doi.org/10.5281/zenodo.19643021).
 
+---
+
+## Scripts
+
+| Script | Purpose |
+|---|---|
+| `benchmarking.py` | Measures inference throughput, latency, CPU/memory load, and (on Raspberry Pi) power and energy efficiency for each model × question pair. |
+| `MMLU.py` | Runs the six-category MMLU subset (Formal Logic, Global Facts, College Computer Science, College Mathematics, Marketing, High School Macroeconomics) via DeepEval. |
+| `analyze_results.py` | Aggregates per-run JSON results, produces summary statistics and plots, and optionally rates teaching effectiveness via the OpenAI API. |
+| `visualize_mmlu.py` | Generates bar and radar plots from the MMLU JSON outputs. |
+
+---
+
+## Requirements
+
+- Linux (tested on Raspberry Pi OS Lite 64-bit, kernel 6.12, Debian 12 bookworm; any modern Linux distribution should work for the non-Pi platforms)
+- Python 3.8 or higher
+- [Ollama](https://ollama.com/download)
+- Python packages (versions used in the study):
+  - `ollama` 0.1.0
+  - `psutil` 5.9.0
+  - `matplotlib` 3.7.0
+  - `pandas` 2.0.0
+  - `openai` 1.0.0
+  - `deepeval` 0.21.0
+
+Power and energy telemetry relies on `vcgencmd` and is therefore only available on Raspberry Pi hardware; all other metrics run on any Linux host.
+
+---
+
+## Installation
+
+```bash
 git clone https://github.com/RobotStudyCompanion/Benchmarking_LLM.git
-
-# Requirements and packages
-
-Python 3.8 or higher
-Ollama (you can download on : https://ollama.com/download)
-
-you will need python packages (versions are the one that has been used during the Thesis): 
-ollama 0.1.0
-psutil 5.9.0
-matplotlib 3.7.0
-pandas 2.0.0
-openai 1.0.0
-deepeval 0.21.0
-
-you can download everything using this command :
+cd Benchmarking_LLM
 pip install ollama psutil matplotlib pandas openai deepeval
-
-# Seting up the benchmark : 
-
-open the Excel_models file and add the different models you want to benchmark in the table like the exemple (you can find the ollama_name of the models on the ollama library part of the website).
-Save this file as .csv into the folder.
-
-### Configure Questions (Optional)
-Some questions are used for the benchmark, you can add, delete, modified every questions for your purpose.
-They are stored in question.txt (follow the format)
-
-### Set OpenAI API Key
-If you want to test the effectiveness of teaching of your models, you need to import an API key (openAI key).
-you can get your API key from: https://platform.openai.com/api-keys
-
-**Windows (PowerShell):**
-```powershell
-$env:OPENAI_API_KEY = "your-api-key-here"
 ```
 
-**Windows (CMD):**
-```cmd
-set OPENAI_API_KEY=your-api-key-here
-```
+Pull each model you wish to benchmark via Ollama, e.g. `ollama pull qwen3:0.6b`.
 
-**macOS/Linux:**
+---
+
+## Configuration
+
+### 1. Models list
+
+Open `Excel_models.xlsx`, add one row per model (see existing rows for the format), and export as a semicolon-delimited CSV named `Excel_models.csv` in the project root. The `Ollama name` column must match the tag used by Ollama exactly — find it on [ollama.com/library](https://ollama.com/library). `benchmarking.py` auto-detects the intersection of models present both in Ollama and in `Excel_models.csv`.
+
+### 2. Questions (optional)
+
+The ten pedagogical questions used in the study live in `questions.txt` (one per line; lines beginning with `#` are comments). Edit the file to substitute your own set whilst preserving the format.
+
+### 3. OpenAI API key (optional, for teaching-effectiveness rating)
+
+Obtain a key from [platform.openai.com/api-keys](https://platform.openai.com/api-keys) and export it:
+
 ```bash
 export OPENAI_API_KEY='your-api-key-here'
 ```
 
-# Running the benchmark
+---
 
-Keep in mind that depending on the device used, the benchmark can takes a lot of times. There is no checkpoint save during the process so i strongly advice to perform only a few models at a time.
+## Usage
 
-You can now run benchmarking.py
+### Hardware benchmark
 
-**What it does:**
-1. Auto-detects models installed in Ollama that match `Excel_models.csv`
-2. Loads questions from [questions.txt](questions.txt)
-3. Runs each question through each model
-4. Measures performance metrics:
-   - Tokens per second
-   - Inference time
-   - CPU usage
-   - Memory consumption
-   - Time to first token
-   - Power consumption (on Raspberry Pi)
-   - Energy efficiency (tokens per joule)
-5. Saves results to:
-   - `benchmark.csv` - Summary results
-   - `results/benchmark_all_models_YYYYMMDD_HHMMSS.json` - Detailed JSON
-   - `result/benchmark_all_models_YYYYMMDD_HHMMSS.csv` - Detailed CSV
+```bash
+python benchmarking.py
+```
 
+Runs every configured question against every matching model with streaming enabled. `benchmark.csv` is written incrementally, so partial progress survives interruption. Full per-session results land in `results/benchmark_all_models_YYYYMMDD_HHMMSS.{json,csv}`.
 
-## Running MMLU Benchmarks
+### MMLU evaluation
 
-### MMLU (Massive Multitask Language Understanding) Testing
-You can run the MMLU benchmark to test the knowledge of each of you models, i recommend to perform it on a powerfull machine as it require a lot of computational power to go through every questions.
+MMLU is compute-intensive; run it on a discrete GPU where possible.
 
 ```bash
 python MMLU.py
 ```
 
-**What it does:**
-1. Tests models on 6 MMLU task categories:
-   - Formal Logic
-   - Global Facts
-   - College Computer Science
-   - College Mathematics
-   - Marketing
-   - High School Macroeconomics
-2. Uses 3-shot learning (provides 3 examples before each question)
-3. Evaluates model accuracy on multiple-choice questions
-4. Displays the first 3 prompts and responses for debugging
-5. Saves progressive checkpoints after each task
-6. Saves results to:
-   - `MMLU/{model-name}_MMLU.json` - Summary scores by task
-   - `MMLU/{model-name}_MMLU.csv` - CSV format results
-   - `MMLU/checkpoints/` - Progressive checkpoints per task
+By default, `MMLU.py` evaluates a single model set in its `__main__` block. Edit that call to change the model, or swap in `run_mmlu_for_all_models()` to cover every Ollama-registered model. Outputs land in `MMLU/` as per-model JSON/CSV plus per-task checkpoints.
 
-**Customizing MMLU tests:**
-By default, the script runs a specific model
+### Hardware-result analysis
 
-```python
-run_mmlu_single_model('granite4:1b-h')
+```bash
+python analyze_results.py
 ```
 
-To test a different model, edit this line or modify the script to test all your models:
-```python
-# Option 1: Test a single model
-run_mmlu_single_model('llama3.2:1b')
+Aggregates every JSON file under `results/`, writes `analysis_summary.csv`, and produces six plots under `analysis_graphs/`. If `OPENAI_API_KEY` is set, the script then rates each response against eight teaching criteria (clarity, accuracy, engagement, structure, completeness, appropriate level, examples/analogies, actionable) using `gpt-4o-mini`, writing `teaching_effectiveness_ratings.json` and two additional plots.
 
-# Option 2: Test all available models
-run_mmlu_for_all_models()
+### MMLU visualisation
+
+```bash
+python visualize_mmlu.py
 ```
 
+Reads the JSON files in `MMLU/`, splits models into small (< 2 B) and large (≥ 2 B), and writes overall and per-task bar charts plus a radar chart per model to the same directory.
 
+---
 
-# Analysing the results
+## Citing
 
-After running the benchmark on all the models you want to test,
-you can run analyse_results.py
+- Zenodo dataset:
+Lamouille, D., Zorec, M. B., Baksh, F., & Kruusamäe, K. (2026). *Supplemental materials to "Benchmarking Local Language Models for Social Robots using Edge Devices"* [Data set]. Zenodo. [https://doi.org/10.5281/zenodo.19643021](https://doi.org/10.5281/zenodo.19643021)
 
-**What it does:**
-1. Loads all JSON results from `./results/` directory
-2. Calculates summary statistics for each model
-3. Generates visualization graphs in `./analysis_graphs/`:
-   - `tokens_per_second.png` - Performance comparison
-   - `energy_efficiency.png` - Energy metrics
-   - `inference_time_distribution.png` - Timing distributions
-   - `response_vs_performance.png` - Response length analysis
-   - `resource_usage.png` - CPU, memory, temperature
-   - `model_radar_chart.png` - Multi-dimensional comparison
-4. Exports summary to `analysis_summary.csv`
-5. (Optional) Rates teaching effectiveness using OpenAI API
-   - Generates `teaching_effectiveness_ratings.json`
-   - Creates `teaching_effectiveness_scores.png` and `performance_vs_teaching.png`
+- The accompanying paper citation will be added once the paper is published. 
+Please find a machine-readable `CITATION.cff` provided at the repository root.
 
+---
 
-## Visualizing MMLU Results
+## Learn more
 
-If you have MMLU benchmark results, you can visualize them using visualize_mmlu.py:
+- **Data, methodology, and caveats:** the Zenodo record ([10.5281/zenodo.19643021](https://doi.org/10.5281/zenodo.19643021)) carries the canonical data dictionary, full methodology, and known caveats alongside the per-run data.
+- **The RSC project:** [rsc.ee](https://rsc.ee).
 
-**What it does:**
-1. Loads MMLU results from `./MMLU/` directory (JSON files ending with `_MMLU.json`)
-2. Categorizes models into small (<2B) and big (≥2B)
-3. Generates visualizations:
-   - Overall score comparisons (all models, small models, big models)
-   - Task-specific performance graphs
-   - Individual model radar charts
-4. Saves graphs to `./MMLU/` directory
+---
+
+## Licence
+
+Apache 2.0 — see [`LICENSE`](LICENSE).
