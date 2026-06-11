@@ -191,7 +191,7 @@ Lamouille, D., Zorec, M. B., Baksh, F., & Kruusamäe, K. (2026). *Supplemental m
 We provide a machine-readable [`CITATION.cff`](CITATION.cff) at the repository root.  
 
 
-D. Lamouille, M. B. Zorec, F. Baksh and K. Kruusamäe, "**Benchmarking Local Language Models for Social Robots Using Edge Devices**," 2026 _IEEE International Conference on Advanced Robotics and its Social Impacts (ARSO)_, Vienna, Austria, 2026, pp. 237-244, doi: [10.1109/ARSO68304.2026.11536131] (https://ieeexplore.ieee.org/abstract/document/11536131)
+D. Lamouille, M. B. Zorec, F. Baksh and K. Kruusamäe, "**Benchmarking Local Language Models for Social Robots Using Edge Devices**," 2026 _IEEE International Conference on Advanced Robotics and its Social Impacts (ARSO)_, Vienna, Austria, 2026, pp. 237-244, doi: [10.1109/ARSO68304.2026.11536131](https://ieeexplore.ieee.org/abstract/document/11536131)
 
 
 ---
