@@ -188,8 +188,10 @@ The [`future/`](future/) directory holds forward-looking material that is not pa
 
 Lamouille, D., Zorec, M. B., Baksh, F., & Kruusamäe, K. (2026). *Supplemental materials to "Benchmarking Local Language Models for Social Robots using Edge Devices"* [Data set]. Zenodo. [https://doi.org/10.5281/zenodo.19643021](https://doi.org/10.5281/zenodo.19643021)
 
-We provide a machine-readable [`CITATION.cff`](CITATION.cff) at the repository root.
-D. Lamouille, M. B. Zorec, F. Baksh and K. Kruusamäe, "Benchmarking Local Language Models for Social Robots Using Edge Devices," 2026 IEEE International Conference on Advanced Robotics and its Social Impacts (ARSO), Vienna, Austria, 2026, pp. 237-244, doi: [10.1109/ARSO68304.2026.11536131] (https://ieeexplore.ieee.org/abstract/document/11536131)
+We provide a machine-readable [`CITATION.cff`](CITATION.cff) at the repository root.  
+
+
+D. Lamouille, M. B. Zorec, F. Baksh and K. Kruusamäe, "**Benchmarking Local Language Models for Social Robots Using Edge Devices**," 2026 _IEEE International Conference on Advanced Robotics and its Social Impacts (ARSO)_, Vienna, Austria, 2026, pp. 237-244, doi: [10.1109/ARSO68304.2026.11536131] (https://ieeexplore.ieee.org/abstract/document/11536131)
 
 
 ---
